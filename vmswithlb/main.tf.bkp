@@ -1,0 +1,125 @@
+resource "azurerm_resource_group" "prodlinux" {
+  name     = "${var.prefix}-rsg"
+  location = var.strlocation
+}
+
+
+resource "azurerm_virtual_network" "productionnetwork" {
+  name                = "${var.prefix}-network"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.prodlinux.location
+  resource_group_name = azurerm_resource_group.prodlinux.name
+}
+
+resource "azurerm_subnet" "ubuntusubnet" {
+  name                 = "internal"
+  resource_group_name  = azurerm_resource_group.prodlinux.name
+  virtual_network_name = azurerm_virtual_network.productionnetwork.name
+  address_prefixes     = ["10.0.2.0/24"]
+}
+
+resource "azurerm_network_interface" "linuxvmnic" {
+  count=2
+  name                = "linuxvmnic-${count.index}"
+  location            = azurerm_resource_group.prodlinux.location
+  resource_group_name = azurerm_resource_group.prodlinux.name
+
+  ip_configuration {
+    name                          = "internal-${count.index}"
+    subnet_id                     = azurerm_subnet.ubuntusubnet.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
+
+resource "azurerm_linux_virtual_machine" "ubuntuvm1" {
+  count=2
+  name                = "${var.prefix}-${count.index}"
+  resource_group_name = azurerm_resource_group.prodlinux.name
+  location            = azurerm_resource_group.prodlinux.location
+  size                = "Standard_F2"
+  admin_username      = "adminuser"
+  network_interface_ids = [
+    azurerm_network_interface.linuxvmnic[count.index].id,
+  ]
+
+  admin_ssh_key {
+    username   = "adminuser"
+    public_key = file("/home/darshana/Terraform/vmswithlb/key.pub")
+  }
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts"
+    version   = "latest"
+  }
+}
+
+/*
+#public ip for load balancer
+resource "azurerm_public_ip" "strpubliicip" {
+
+  name = "pubip"
+  resource_group_name = azurerm_resource_group.prodlinux.name
+  allocation_method = "Dynamic"
+  location = azurerm_resource_group.prodlinux.location
+}
+
+
+resource "azurerm_lb" "loadbalancer" {
+
+
+  name = "wlb"
+  location = azurerm_resource_group.prodlinux.location
+  resource_group_name = azurerm_resource_group.prodlinux.name
+  frontend_ip_configuration {
+    name = "fip"
+    public_ip_address_id = azurerm_public_ip.strpubliicip.id
+    
+  }
+}
+
+
+
+resource "azurerm_lb_probe" "lbprobe" {
+
+  name="hproble"
+  loadbalancer_id = azurerm_lb.loadbalancer.id
+  protocol = "Tcp"
+  port=80
+  interval_in_seconds = 30
+  
+  
+}
+
+resource "azurerm_lb_backend_address_pool" "backendaddresspool" {
+
+  name = "bckippool"
+  loadbalancer_id = azurerm_lb.loadbalancer.id
+  
+}
+
+resource "azurerm_network_interface_backend_address_pool_association" "loadlbalancerassigntobpool" {
+
+  count=2
+  network_interface_id = azurerm_network_interface.linuxvmnic[count.index].id
+  ip_configuration_name = "internal-${count.index}"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.backendaddresspool.id
+  
+}
+
+
+*/
+
+output "name" {
+
+ 
+  value = azurerm_network_interface.linuxvmnic[*].ip_configuration
+  
+}
