@@ -22,7 +22,7 @@ jobs:
         shell: bash
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: hashicorp/setup-terraform@v1
     
     - name: 'Terraform-Format'
       uses: hashicorp/terraform-github-action@master
