@@ -30,13 +30,14 @@ jobs:
       with: 
         tf_actions_version: 1.7.3
         tf_actions_subcommand: 'fmt'
-        tf_actions_working_dir: "./terraform"
+        working-directory: ${{env.ROOT_PATH}}
 
     - name: 'Terraform Init'
       uses: hashicorp/terraform-github-action@master
       with: 
         tf_actions_version: 1.7.3
         tf_actions_subcommand: 'init'
+        working-directory: ${{env.ROOT_PATH}}
        
 
     
@@ -46,6 +47,7 @@ jobs:
       with: 
         tf_actions_version: 1.7.3
         tf_actions_subcommand: 'validate'
+        working-directory: ${{env.ROOT_PATH}}
        
 
     - name: 'Terraform plan'
@@ -53,6 +55,7 @@ jobs:
       with: 
         tf_actions_version: 1.7.3
         tf_actions_subcommand: 'plan'
+        working-directory: ${{env.ROOT_PATH}}
    
 
 
@@ -61,4 +64,5 @@ jobs:
       with: 
         tf_actions_version: 1.7.3
         tf_actions_subcommand: 'apply'
+        working-directory: ${{env.ROOT_PATH}}
 
