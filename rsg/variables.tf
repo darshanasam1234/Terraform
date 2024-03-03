@@ -6,6 +6,6 @@ variable "rsgname" {
 }
 
 variable "rsglocation" {
-  
-    default="eastus"
+
+  default = "eastus"
 }
