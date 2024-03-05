@@ -52,7 +52,7 @@ jobs:
        
 
     - name: 'Terraform plan'
-      uses: hhashicorp/setup-terraform@v2
+      uses: hashicorp/setup-terraform@v2
       with: 
         tf_actions_version: 1.7.3
         tf_actions_subcommand: 'plan'
