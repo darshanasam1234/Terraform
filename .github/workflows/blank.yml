@@ -39,8 +39,6 @@ jobs:
         working-directory: ${{env.ROOT_PATH}}
        
 
-    
-
     - name: 'Terraform validate'
       uses: hashicorp/terraform-github-action@master
       with: 
