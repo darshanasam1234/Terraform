@@ -12,6 +12,7 @@ env:
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENENT_ID }}
       ROOT_PATH: '${{github.workspace}}/rsg'
+      ARM_ACCESS_KEY: ${{secrets.STATE_STORAGE_ACCESS_KEY}}
 
 jobs:
 
@@ -34,8 +35,11 @@ jobs:
           cli_config_credentials_token: ${{ secrets.GITHUB_TOKEN}}
     
     - name: terraform init
+      env:
+        ARM_ACCESS_KEY: ${{secrets.STATE_STORAGE_ACCESS_KEY}}
       run: terraform init
       working-directory: ${{ env.ROOT_PATH}}
+  
 
     - name: terraform plan
       run: terraform plan
