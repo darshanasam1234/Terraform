@@ -2,7 +2,7 @@ name: 'Terraform'
 
 on:
   push:
-  - main
+    - main
   pull_request:
 
 
