@@ -1,7 +1,8 @@
 name: 'Terraform'
 
 on:
-  push_request:
+  push:
+    branches:
     - main
   pull_request:
 
