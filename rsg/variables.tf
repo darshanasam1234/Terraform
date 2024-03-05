@@ -1,7 +1,7 @@
 variable "rsgname" {
 
 
-  default = "Srilanka102"
+  default = "Srilanka103"
 
 }
 
