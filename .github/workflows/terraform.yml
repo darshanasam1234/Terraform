@@ -27,14 +27,14 @@ jobs:
       uses: hashicorp/setup-terraform@v3
     
     - name: 'Terraform-Format'
-      uses: hashicorp/terraform-github-action@master
+      uses: hashicorp/setup-terraform
       with: 
         tf_actions_version: 1.7.3
         tf_actions_subcommand: 'fmt'
         working-directory: ${{env.ROOT_PATH}}
 
     - name: 'Terraform Init'
-      uses: hashicorp/terraform-github-action@master
+      uses: hashicorp/setup-terraform
       with: 
         tf_actions_version: 1.7.3
         tf_actions_subcommand: 'init'
@@ -44,7 +44,7 @@ jobs:
     
 
     - name: 'Terraform validate'
-      uses: hashicorp/terraform-github-action@master
+      uses: hashicorp/setup-terraform
       with: 
         tf_actions_version: 1.7.3
         tf_actions_subcommand: 'validate'
@@ -52,7 +52,7 @@ jobs:
        
 
     - name: 'Terraform plan'
-      uses: hashicorp/terraform-github-action@master
+      uses: hhashicorp/setup-terraform
       with: 
         tf_actions_version: 1.7.3
         tf_actions_subcommand: 'plan'
@@ -61,7 +61,7 @@ jobs:
 
 
     - name: 'Terraform validate'
-      uses: hashicorp/terraform-github-action@master
+      uses: hashicorp/setup-terraform
       with: 
         tf_actions_version: 1.7.3
         tf_actions_subcommand: 'apply'
