@@ -36,12 +36,9 @@ jobs:
     - name: terraform init
       run: terraform init
       working-directory: ${{ env.ROOT_PATH}}
-    - name: terraform init
-      run: terraform init
-      working-directory: ${{ env.ROOT_PATH}}
 
-    - name: terraform init
-      run: terraform init
+    - name: terraform apply
+      run: terraform apply
       working-directory: ${{ env.ROOT_PATH}}
 
 
