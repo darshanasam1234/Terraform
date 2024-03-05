@@ -35,7 +35,7 @@ jobs:
           cli_config_credentials_token: ${{ secrets.GITHUB_TOKEN}}
     
     - name: terraform init   
-      run: terraform init -backend-config"access_key=${{ env.ARM_ACCESS_KEY}}
+      run: terraform init -backend-config="access_key=${{ env.ARM_ACCESS_KEY}}
       working-directory: ${{ env.ROOT_PATH}}
   
 
