@@ -5,8 +5,17 @@ terraform {
       version = "3.32.0"
     }
   }
-}
 
+
+
+backend "azurerm" {
+  resource_group_name="Terraform_rsg"
+  storage_account_name="terraformcoderepodja"
+  container_name="terraformstate"
+  key="terraformcoderepodja"
+
+}
+}
 provider "azurerm" {
   # Configuration options
 
