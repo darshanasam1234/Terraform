@@ -39,6 +39,11 @@ resource "azurerm_linux_virtual_machine" "ubuntuvm1" {
     azurerm_network_interface.linuxvmnic.id,
   ]
 
+  data "azurerm_ssh_public_key" "ssh_key"{
+    name= "githubaction"
+    resource_group_name="Terraform_rsg"
+  }
+ 
   admin_ssh_key {
     username   = "adminuser"
     public_key = file("~/.ssh/id_rsa.pub")
