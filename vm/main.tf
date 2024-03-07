@@ -46,12 +46,10 @@ resource "azurerm_linux_virtual_machine" "ubuntuvm1" {
   ]
 
 
-
-
  
   admin_ssh_key {
     username   = "adminuser"
-    public_key = file("~/.ssh/id_rsa.pub")
+    public_key = file(azurerm_ssh_public_key.name)
   }
 
   os_disk {
