@@ -36,7 +36,7 @@ resource "azurerm_linux_virtual_machine" "ubuntuvm1" {
   size                = "Standard_F2"
   admin_username      = "adminuser"
   network_interface_ids = [
-    azurerm_network_interface.winnic.id,
+    azurerm_network_interface.linuxvmnic.id,
   ]
 
   admin_ssh_key {
