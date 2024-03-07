@@ -24,7 +24,7 @@ resource "azurerm_network_interface" "linuxvmnic" {
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = azurerm_subnet.winsubnet.id
+    subnet_id                     = azurerm_subnet.prodsubnet.id
     private_ip_address_allocation = "Dynamic"
   }
 }
