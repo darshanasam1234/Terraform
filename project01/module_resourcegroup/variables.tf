@@ -1,5 +1,5 @@
 variable "strrsgname" {
-    dedescription = "this is resource group name"  
+    description = "resource group name"
 }
 
 variable "strlocation" {
