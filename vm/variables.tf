@@ -42,8 +42,3 @@ variable "strlocation" {
   default = "West Europe"
   
 }
-
-
-output "ip add"{
-value = azurerm_linux_virtual_machine.ubuntuvm1.public_ip_addresses
-}
