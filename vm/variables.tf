@@ -1,6 +1,6 @@
 variable "prefix" {
 
-  default = "linuxprod"
+  default = "linuxprod2"
   
 }
 
