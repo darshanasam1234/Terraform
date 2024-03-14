@@ -65,3 +65,7 @@ resource "azurerm_linux_virtual_machine" "ubuntuvm1" {
   }
 }
 
+
+output "ip add"{
+value = azurerm_linux_virtual_machine.ubuntuvm1.public_ip_addresses
+}
