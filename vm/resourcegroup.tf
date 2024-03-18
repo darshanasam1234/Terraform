@@ -10,3 +10,10 @@ resource "azurerm_resource_group" "singapore" {
   name = "singapore"
   location = "eastus"
 }
+
+module "resourcegrouplinuxproduction4" {
+    source = "./module_resourcegroup"
+    strrsgname = "linuxproduction018"
+    strlocation = "eastus"
+  
+}
