@@ -17,3 +17,11 @@ module "resourcegrouplinuxproduction4" {
     strlocation = "eastus"
   
 }
+
+module "resourcegrouplinuxproduction6" {
+    source = "./module_resourcegroup"
+    strrsgname = "linuxproduction0123"
+    strlocation = "eastus"
+  
+}
+
