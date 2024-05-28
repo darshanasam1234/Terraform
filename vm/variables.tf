@@ -1,38 +1,38 @@
 variable "prefix" {
 
   default = "linuxprod2"
-  
+
 }
 
 variable "strpubglisher" {
-  
-  default="MicrosoftWindowsServer"
+
+  default = "MicrosoftWindowsServer"
 }
 
 variable "size" {
-  
+
   default = "Standard_F2"
 }
 
 variable "stradminuser" {
-  
+
   default = "djaadmin"
 }
 
 variable "strpassword" {
-  
-  default = "P@$$w0rd1234!"
+
+  default   = "P@$$w0rd1234!"
   sensitive = true
 }
 
 variable "os_disk_settings" {
 
-  type = map(string)
+  type        = map(string)
   description = "os disk settings"
   default = {
-    name = "myosdisk"
-    caching= "ReadWrite"
-    storage_account_type="Premium_LRS"
+    name                 = "myosdisk"
+    caching              = "ReadWrite"
+    storage_account_type = "Premium_LRS"
   }
 }
 
@@ -40,5 +40,5 @@ variable "os_disk_settings" {
 variable "strlocation" {
 
   default = "West Europe"
-  
+
 }
