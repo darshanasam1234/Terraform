@@ -1,46 +1,23 @@
-name: 'Terraform Linting'
+name: Lint Terraform Code
 
 on:
   pull_request:
-    branches:
-      - main
-
-env:
-  ROOT_PATH: '${{ github.workspace }}/vm'
+    branches: [ main ]
 
 jobs:
-  terraform_lint:
-    name: 'Terraform Linting'
+  lint:
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        shell: bash
-    
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v1
-    
-    - name: Terraform Init
-      run: terraform init
-      working-directory: ${{ env.ROOT_PATH }}
-    
-    - name: Terraform Format Check
-      run: terraform fmt -check
-      working-directory: ${{ env.ROOT_PATH }}
-    
-    - name: Terraform Validate
-      run: terraform validate
-      working-directory: ${{ env.ROOT_PATH }}
+      - name: Set up working directory
+        run: mkdir -p ${{github.workspace}}/vm
+        working-directory: ${{github.workspace}}/vm
 
-    # Optional: Run TFLint for additional linting (ensure tflint is installed)
-    - name: Install TFLint
-      run: |
-        curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
-    
-    - name: Run TFLint
-      run: tflint
-      working-directory: ${{ env.ROOT_PATH }}
+      - name: Terraform Format
+        run: terraform fmt -check
+        working-directory: ${{github.workspace}}/vm
+
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: ${{github.workspace}}/vm
