@@ -4,20 +4,21 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+      ROOT_PATH: '${{github.workspace}}/vm'
+
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up working directory
-        run: mkdir -p ${{github.workspace}}/vm
-        working-directory: ${{github.workspace}}/vm
+  
 
       - name: Terraform Format
         run: terraform fmt -check
-        working-directory: ${{github.workspace}}/vm
+        working-directory: ${{env.ROOT_PATH}}
 
       - name: Terraform Validate
         run: terraform validate
-        working-directory: ${{github.workspace}}/vm
+        working-directory: ${{env.ROOT_PATH}}
